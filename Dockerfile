@@ -1,5 +1,7 @@
 FROM ubuntu:focal
 
+COPY 0001-disable-root-check.patch /root/
+
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt update
@@ -14,6 +16,7 @@ SHELL ["/bin/bash", "-c"]
 RUN git clone https://github.com/openbmc/openbmc.git && \
 	cd openbmc && \
 	git checkout 2.9.0 && \
+	git apply /root/0001-disable-root-check.patch && \
 	source setup g220a && \
 	echo "BB_GENERATE_MIRROR_TARBALLS = \"1\"" >> conf/local.conf && \
 	bitbake --runall=fetch obmc-phosphor-image && \
