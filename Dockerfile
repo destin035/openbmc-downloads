@@ -9,6 +9,8 @@ RUN locale-gen en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8 
 
+SHELL ["/bin/bash", "-c"]
+
 RUN git clone https://github.com/openbmc/openbmc.git && \
 	cd openbmc && \
 	git checkout 2.9.0 && \
