@@ -26,3 +26,4 @@ RUN git clone https://github.com/openbmc/openbmc.git && \
 FROM nginx:1.21
 
 COPY --from=stage1 /openbmc-downloads /
+COPY nginx.conf /etc/nginx/nginx.conf
