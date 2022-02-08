@@ -19,5 +19,6 @@ RUN git clone https://github.com/openbmc/openbmc.git && \
 	git apply /root/0001-disable-root-check.patch && \
 	source setup g220a && \
 	echo "BB_GENERATE_MIRROR_TARBALLS = \"1\"" >> conf/local.conf && \
+	echo "BB_NUMBER_THREADS = \"20\"" >> conf/local.conf && \
 	bitbake --runall=fetch obmc-phosphor-image && \
 	ln -sf $PWD/downloads /downloads
