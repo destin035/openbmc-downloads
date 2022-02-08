@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:focal AS stage1
 
 COPY 0001-disable-root-check.patch /root/
 
@@ -19,6 +19,10 @@ RUN git clone https://github.com/openbmc/openbmc.git && \
 	git apply /root/0001-disable-root-check.patch && \
 	source setup g220a && \
 	echo "BB_GENERATE_MIRROR_TARBALLS = \"1\"" >> conf/local.conf && \
-	echo "BB_NUMBER_THREADS = \"20\"" >> conf/local.conf && \
+	echo "BB_NUMBER_THREADS = \"8\"" >> conf/local.conf && \
 	bitbake --runall=fetch obmc-phosphor-image && \
-	ln -sf $PWD/downloads /downloads
+	ln -sf $PWD/downloads /openbmc-downloads
+
+FROM nginx:1.21
+
+COPY --from=stage1 /openbmc-downloads /
