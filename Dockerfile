@@ -4,7 +4,7 @@ ARG LANG=C
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt update
-RUN apt install -y git chrpath diffstat gawk python3-distutils
+RUN apt install -y git chrpath diffstat gawk python3-distutils locales
 RUN locale-gen en_US.UTF-8
 
 RUN LANG=en_US.UTF-8 git clone https://github.com/openbmc/openbmc.git && \
