@@ -1,0 +1,26 @@
+From 2d257913a8c301ed09d42d43909a5168c6ddf7aa Mon Sep 17 00:00:00 2001
+From: Destin Liu <destin.liu@nebula-matrix.com>
+Date: Tue, 8 Feb 2022 09:35:58 +0000
+Subject: [PATCH] disable-root-check
+
+---
+ poky/meta/classes/sanity.bbclass | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/poky/meta/classes/sanity.bbclass b/poky/meta/classes/sanity.bbclass
+index 3262d08fb..fa5c303c6 100644
+--- a/poky/meta/classes/sanity.bbclass
++++ b/poky/meta/classes/sanity.bbclass
+@@ -767,9 +767,6 @@ def check_sanity_everybuild(status, d):
+     # Sanity tests which test the users environment so need to run at each build (or are so cheap
+     # it makes sense to always run them.
+
+-    if 0 == os.getuid():
+-        raise_sanity_error("Do not use Bitbake as root.", d)
+-
+     # Check the Python version, we now have a minimum of Python 3.4
+     import sys
+     if sys.hexversion < 0x030500F0:
+--
+2.25.1
+
