@@ -3,7 +3,7 @@ FROM ubuntu:focal
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt update
-RUN apt install -y git chrpath diffstat gawk python3-distutils locales wget build-essential
+RUN apt install -y git chrpath diffstat gawk python3-distutils locales wget build-essential cpio
 RUN locale-gen en_US.UTF-8
 
 ENV LC_ALL en_US.UTF-8
